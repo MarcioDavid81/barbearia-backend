@@ -4,11 +4,12 @@ interface UserRequest {
     user_id: string;
     name: string;
     adress: string;
+    phone: string;
     banner?: string;
 }
 
 class UpdateUserService {
-  async execute({ user_id, name, adress, banner }: UserRequest) {
+  async execute({ user_id, name, adress, phone, banner }: UserRequest) {
     
     try{
 
@@ -29,11 +30,13 @@ class UpdateUserService {
             data: {
                 name,
                 adress,
+                phone,
                 banner
             },
             select: {
                 name: true,
                 adress: true,
+                phone: true,
                 banner: true
             }
         });
