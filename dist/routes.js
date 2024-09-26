@@ -16,6 +16,7 @@ const DetailHaircutController_1 = require("./controllers/haircut/DetailHaircutCo
 const NewScheduleController_1 = require("./controllers/schedule/NewScheduleController");
 const ListScheduleController_1 = require("./controllers/schedule/ListScheduleController");
 const FinishScheduleController_1 = require("./controllers/schedule/FinishScheduleController");
+const DeleteHaircutController_1 = require("./controllers/haircut/DeleteHaircutController");
 const router = (0, express_1.Router)();
 exports.router = router;
 //Rotas User
@@ -30,6 +31,7 @@ router.put('/haircut', isAuthenticated_1.isAuthenticated, new UpdateHaircutContr
 router.get('/haircut/check', isAuthenticated_1.isAuthenticated, new CheckSubscriptionController_1.CheckSubscriptionController().handle);
 router.get('/haircut/count', isAuthenticated_1.isAuthenticated, new CountHaircutsController_1.CountHaircutsController().handle);
 router.get('/haircut/detail', isAuthenticated_1.isAuthenticated, new DetailHaircutController_1.DetailHaircutController().handle);
+router.delete('/haircut', isAuthenticated_1.isAuthenticated, new DeleteHaircutController_1.DeleteHaircutController().handle);
 //Rotas Schedule
 router.post('/schedule', isAuthenticated_1.isAuthenticated, new NewScheduleController_1.NewScheduleController().handle);
 router.get('/schedules', isAuthenticated_1.isAuthenticated, new ListScheduleController_1.ListScheduleController().handle);

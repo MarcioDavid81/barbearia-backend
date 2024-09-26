@@ -12,43 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateUserService = void 0;
+exports.DeleteHaircutService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
-class UpdateUserService {
+class DeleteHaircutService {
     execute(_a) {
-        return __awaiter(this, arguments, void 0, function* ({ user_id, name, adress, phone, banner }) {
+        return __awaiter(this, arguments, void 0, function* ({ haircut_id }) {
+            if (haircut_id === '') {
+                throw new Error("Haircut id is required");
+            }
             try {
-                const userAlreadyExists = yield prisma_1.default.user.findFirst({
+                yield prisma_1.default.haircut.delete({
                     where: {
-                        id: user_id
+                        id: haircut_id
                     }
                 });
-                if (!userAlreadyExists) {
-                    throw new Error("Usuário não existe");
-                }
-                const userUpdated = yield prisma_1.default.user.update({
-                    where: {
-                        id: user_id
-                    },
-                    data: {
-                        name,
-                        adress,
-                        phone,
-                        banner
-                    },
-                    select: {
-                        name: true,
-                        adress: true,
-                        phone: true,
-                        banner: true
-                    }
-                });
-                return userUpdated;
+                return { message: "Haircut deleted successfully" };
             }
             catch (err) {
-                throw new Error("Erro ao atualizar usuário");
+                throw new Error(err);
             }
         });
     }
 }
-exports.UpdateUserService = UpdateUserService;
+exports.DeleteHaircutService = DeleteHaircutService;

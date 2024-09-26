@@ -9,17 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateUserController = void 0;
-const UpdateUserService_1 = require("../../services/user/UpdateUserService");
-class UpdateUserController {
+exports.DeleteHaircutController = void 0;
+const DeleteHaircutService_1 = require("../../services/haircut/DeleteHaircutService");
+class DeleteHaircutController {
     handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { name, adress, phone, banner } = request.body;
-            const user_id = request.user_id;
-            const updateUser = new UpdateUserService_1.UpdateUserService();
-            const user = yield updateUser.execute({ user_id, name, adress, phone, banner });
-            return response.json(user);
+            const { haircut_id } = request.query;
+            const deleteHaircutService = new DeleteHaircutService_1.DeleteHaircutService();
+            const haircut = yield deleteHaircutService.execute({
+                haircut_id: haircut_id,
+            });
+            return response.json(haircut);
         });
     }
 }
-exports.UpdateUserController = UpdateUserController;
+exports.DeleteHaircutController = DeleteHaircutController;
