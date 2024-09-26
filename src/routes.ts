@@ -13,6 +13,7 @@ import { DetailHaircutController } from './controllers/haircut/DetailHaircutCont
 import { NewScheduleController } from './controllers/schedule/NewScheduleController';
 import { ListScheduleController } from './controllers/schedule/ListScheduleController';
 import { FinishScheduleController } from './controllers/schedule/FinishScheduleController';
+import { DeleteHaircutController } from './controllers/haircut/DeleteHaircutController';
 
 const router = Router();
 
@@ -30,6 +31,7 @@ router.put('/haircut', isAuthenticated, new UpdateHaircutController().handle);
 router.get('/haircut/check', isAuthenticated, new CheckSubscriptionController().handle);
 router.get('/haircut/count', isAuthenticated, new CountHaircutsController().handle);
 router.get('/haircut/detail', isAuthenticated, new DetailHaircutController().handle);
+router.delete('/haircut', isAuthenticated, new DeleteHaircutController().handle);
 
 //Rotas Schedule
 router.post('/schedule', isAuthenticated, new NewScheduleController().handle);
