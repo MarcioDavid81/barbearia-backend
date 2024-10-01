@@ -1,7 +1,30 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
-const express_1 = require("express");
+const express_1 = __importStar(require("express"));
 const CreateUserController_1 = require("./controllers/user/CreateUserController");
 const AuthUserController_1 = require("./controllers/user/AuthUserController");
 const DetailUserController_1 = require("./controllers/user/DetailUserController");
@@ -17,6 +40,9 @@ const NewScheduleController_1 = require("./controllers/schedule/NewScheduleContr
 const ListScheduleController_1 = require("./controllers/schedule/ListScheduleController");
 const FinishScheduleController_1 = require("./controllers/schedule/FinishScheduleController");
 const DeleteHaircutController_1 = require("./controllers/haircut/DeleteHaircutController");
+const SubscribeController_1 = require("./controllers/subscriptions/SubscribeController");
+const WebhooksController_1 = require("./controllers/subscriptions/WebhooksController");
+const CreatePortalController_1 = require("./controllers/subscriptions/CreatePortalController");
 const router = (0, express_1.Router)();
 exports.router = router;
 //Rotas User
@@ -36,3 +62,7 @@ router.delete('/haircut', isAuthenticated_1.isAuthenticated, new DeleteHaircutCo
 router.post('/schedule', isAuthenticated_1.isAuthenticated, new NewScheduleController_1.NewScheduleController().handle);
 router.get('/schedules', isAuthenticated_1.isAuthenticated, new ListScheduleController_1.ListScheduleController().handle);
 router.delete('/schedule', isAuthenticated_1.isAuthenticated, new FinishScheduleController_1.FinishScheduleController().handle);
+//Rotas Subscription
+router.post('/subscribe', isAuthenticated_1.isAuthenticated, new SubscribeController_1.SubscribeController().handle);
+router.post('/webhooks', express_1.default.raw({ type: "aplication/json" }), new WebhooksController_1.WebhooksController().handle);
+router.post('/create-portal', isAuthenticated_1.isAuthenticated, new CreatePortalController_1.CreatePortalController().handle);

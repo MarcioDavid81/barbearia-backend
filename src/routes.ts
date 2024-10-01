@@ -1,4 +1,4 @@
-import { Router, Response, Request } from 'express';
+import express, { Router, Response, Request } from 'express';
 import { CreateUserController } from './controllers/user/CreateUserController';
 import { AuthUserController } from './controllers/user/AuthUserController';
 import { DetailUserController } from './controllers/user/DetailUserController';
@@ -14,6 +14,9 @@ import { NewScheduleController } from './controllers/schedule/NewScheduleControl
 import { ListScheduleController } from './controllers/schedule/ListScheduleController';
 import { FinishScheduleController } from './controllers/schedule/FinishScheduleController';
 import { DeleteHaircutController } from './controllers/haircut/DeleteHaircutController';
+import { SubscribeController } from './controllers/subscriptions/SubscribeController';
+import { WebhooksController } from './controllers/subscriptions/WebhooksController';
+import { CreatePortalController } from './controllers/subscriptions/CreatePortalController';
 
 const router = Router();
 
@@ -37,5 +40,10 @@ router.delete('/haircut', isAuthenticated, new DeleteHaircutController().handle)
 router.post('/schedule', isAuthenticated, new NewScheduleController().handle);
 router.get('/schedules', isAuthenticated, new ListScheduleController().handle);
 router.delete('/schedule', isAuthenticated, new FinishScheduleController().handle);
+
+//Rotas Subscription
+router.post('/subscribe', isAuthenticated, new SubscribeController().handle);
+router.post('/webhooks', express.raw({ type: "aplication/json" }), new WebhooksController().handle);
+router.post('/create-portal', isAuthenticated, new CreatePortalController().handle);
 
 export {router};
