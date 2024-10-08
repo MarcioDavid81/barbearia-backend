@@ -64,8 +64,8 @@ model Haircut {
 model Service {
   id        String   @id @default(uuid())
   costumer  String
-  start     DateTime @default(now())
-  end       DateTime @default(now())
+  start     String
+  end       String
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 
@@ -76,3 +76,7 @@ model Service {
   user_id String
 }
 
+//Comando para criar a migration
+//npx prisma migrate dev
+//após a migration, subir pra pasta dist com o comando npm run build
+//e depois subir pro girhub

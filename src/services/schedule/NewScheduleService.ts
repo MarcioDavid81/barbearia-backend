@@ -20,8 +20,8 @@ class NewScheduleService{
         costumer,
         haircut_id,
         user_id,
-        start: new Date(start),
-        end: new Date(end)
+        start,
+        end
       }
     })
 
