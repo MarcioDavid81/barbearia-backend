@@ -14,13 +14,15 @@ const NewScheduleService_1 = require("../../services/schedule/NewScheduleService
 class NewScheduleController {
     handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { haircut_id, costumer } = request.body;
+            const { haircut_id, costumer, start, end } = request.body;
             const user_id = request.user_id;
             const newSchedule = new NewScheduleService_1.NewScheduleService();
             const schedule = yield newSchedule.execute({
                 user_id,
                 haircut_id,
-                costumer
+                costumer,
+                start,
+                end
             });
             return response.json(schedule);
         });

@@ -4,10 +4,12 @@ interface NewScheduleRequest{
   user_id: string;
   haircut_id: string;
   costumer: string;
+  start: string;
+  end: string;
 }
 
 class NewScheduleService{
-  async execute({ user_id, haircut_id, costumer }: NewScheduleRequest){
+  async execute({ user_id, haircut_id, costumer, start, end }: NewScheduleRequest){
 
     if(costumer === '' || haircut_id === ''){
       throw new Error("Error schedule new service.")
@@ -17,7 +19,9 @@ class NewScheduleService{
       data:{
         costumer,
         haircut_id,
-        user_id
+        user_id,
+        start: new Date(start),
+        end: new Date(end)
       }
     })
 

@@ -16,7 +16,7 @@ exports.NewScheduleService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
 class NewScheduleService {
     execute(_a) {
-        return __awaiter(this, arguments, void 0, function* ({ user_id, haircut_id, costumer }) {
+        return __awaiter(this, arguments, void 0, function* ({ user_id, haircut_id, costumer, start, end }) {
             if (costumer === '' || haircut_id === '') {
                 throw new Error("Error schedule new service.");
             }
@@ -24,7 +24,9 @@ class NewScheduleService {
                 data: {
                     costumer,
                     haircut_id,
-                    user_id
+                    user_id,
+                    start: new Date(start),
+                    end: new Date(end)
                 }
             });
             return schedule;
